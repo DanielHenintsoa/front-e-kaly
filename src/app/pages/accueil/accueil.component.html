@@ -1,0 +1,15 @@
+<div class="left">
+    <input type="text" placeholder="nom" #nom>
+    <input type="text" placeholder="prix" #prix>
+    <input type="text" placeholder="nombre" #nombre>
+
+    <button (click)="addPanier(nom.value, prix.value, nombre.value)"> Add To Panier</button>
+</div>
+<div class="right" *ngIf="panier$">
+    <h3>Panier</h3>
+    <ul>
+        <li (click)="deleteProduit(produit.nom)" *ngFor="let produit of panier$ | async">
+            <a [href]="">{{ produit.nom }} - {{ produit.prix }} - {{ produit.nombre }}</a>
+        </li>
+    </ul>
+</div>
