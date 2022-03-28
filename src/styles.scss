@@ -1,17 +1,27 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial';
+// .main-content-inner{
+//     min-height: calc(100vh - 250px);
+// }
+
+.brand-link .brand-image {
+    max-height: none !important;
+    margin: 0 auto !important;
+    width: 128px !important;
+    height: 128px !important;
+    display: block !important;
+    float: none !important;
 }
 
-.left, .right {
-    //float: left;
-    width: 50%;
-    padding: 3em;
+body .wrapper .sidebar {
+    margin-top: calc(9.5rem + 1px) !important;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
+body.sidebar-collapse{
+    .brand-link .brand-image {
+        width: auto !important;
+        max-height: 33px !important;
+    }
+
+    .wrapper .sidebar {
+        margin-top: calc(3.5rem + 1px) !important;
+    }
 }

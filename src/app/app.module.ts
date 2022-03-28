@@ -16,6 +16,8 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 import { EKalyState } from './states/state/e-kaly.state';
+import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
+import { OffsetAreaComponent } from './components/offset-area/offset-area.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { EKalyState } from './states/state/e-kaly.state';
     LoginComponent,
     InscriptionComponent,
     AccueilComponent,
-    ErrorComponent
+    ErrorComponent,
+    SidebarMenuComponent,
+    OffsetAreaComponent
   ],
   imports: [
     BrowserModule,
