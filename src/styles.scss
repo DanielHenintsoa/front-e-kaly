@@ -1,6 +1,4 @@
-// .main-content-inner{
-//     min-height: calc(100vh - 250px);
-// }
+@import "./styles/loader";
 
 .brand-link .brand-image {
     max-height: none !important;
@@ -24,4 +22,24 @@ body.sidebar-collapse{
     .wrapper .sidebar {
         margin-top: calc(3.5rem + 1px) !important;
     }
+}
+
+.main-footer.unlogged{
+    margin-left: 0 !important;
+}
+.login-page, .register-page{
+    background-color: unset !important;
+    background-image: url("assets/images/back-ekaly.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main-content{
+    padding-top: 15px;
+}
+.control-sidebar{
+    width: 350px !important;
+    background-color: #686c70 !important;
+    padding: 15px;
+    overflow: auto;
 }

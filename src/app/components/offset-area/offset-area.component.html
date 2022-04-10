@@ -1,3 +1,43 @@
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
+<aside class="control-sidebar control-sidebar-dark" *ngIf="isLogged">
+    <h3 class="text-center" *ngIf="totalPrix == 0">Panier Vide</h3>
+    <div class="col-md-12 mb-3" *ngIf="totalPrix > 0">
+        <h3 class="text-center">Panier</h3>
+        <button type="button" class="btn btn-success" (click)="validerPanier()">Valider <b>(Total : Ar {{totalPrix.toLocaleString()}})</b></button>
+    </div>
+    <div class="col-md-12" *ngFor="let plat of panier">
+        <div class="card card-outline card-{{plat.resto[0].cardClasse}}" draggable="true">
+            <div class="card-header">
+                <h3 class="card-title">{{plat.libelle}} - <b>{{ plat.nombre.toLocaleString() }}</b>
+                </h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" style="display: block;">
+                <p><b>Resto : </b> {{plat.resto[0].libelle}}</p>
+                <p><b>Pu : </b> {{(plat.pu).toLocaleString() }} </p>
+                <p><b>Total : </b> {{ (plat.nombre * plat.pu).toLocaleString() }} </p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-4">
+                        <button class="btn btn-danger" (click)="removeFromPanier(plat)">Annuler</button>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <input type="number" id="nombre-{{plat._id}}" class="form-control" min="1" value="{{plat.nombre}}" class='form-control'>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-warning btn-flat" (click)="updatePlatPanier(plat)">Modifier</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
 </aside>

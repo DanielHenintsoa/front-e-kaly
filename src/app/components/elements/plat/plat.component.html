@@ -1,0 +1,27 @@
+<div class="card card-outline card-{{plat.resto[0].cardClasse}}">
+    <div class="card-header">
+        <h3 class="card-title">{{plat.libelle}}</h3>
+        <div class="card-tools">
+        <!-- Buttons, labels, and many other things can be placed here! -->
+        <!-- Here is a label for example -->
+        <span class="badge badge-{{plat.resto[0].cardClasse}}">{{plat.resto[0].libelle}}</span>
+        </div>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <p><b>Catégorie : </b> {{ plat.categorie }}</p>
+        <p><b>Prix Unitaire : </b> {{ plat.pu.toLocaleString() }}</p>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <div class="input-group">
+            <input type="number" class="form-control" min="1" [(ngModel)]="nombre" [ngClass]=" error ? 'form-control is-invalid' : 'form-control' ">
+            <span class="input-group-append">
+                <button type="button" class="btn btn-{{plat.resto[0].cardClasse}} btn-flat" (click)="addPanier()">Ajout au Panier</button>
+            </span>
+        </div>
+    </div>
+    <!-- /.card-footer -->
+</div>
+<!-- /.card -->

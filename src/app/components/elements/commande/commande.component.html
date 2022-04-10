@@ -1,0 +1,83 @@
+<div class="card card-outline card-warning">
+    <div class="card-header">
+        <h3 class="card-title">Commande : {{ daty.toLocaleDateString("fr") + " "+ daty.toLocaleTimeString()}} </h3>
+        <div class="card-tools">
+            <span class="badge badge-warning">{{commande.filles.length}} plat(s) - {{commande.resto.libelle}}</span>
+        </div>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Plat
+                </th>
+                <th>
+                    Prix Unitaire
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+            <tr *ngFor="let fille of commande.filles">
+                <td>
+                    {{ fille.plat.libelle }}
+                </td>
+                <td style="text-align: reight;">
+                    {{ fille.pu.toLocaleString() }}
+                </td>
+                <td style="text-align: reight;">
+                    {{ fille.nombre.toLocaleString() }}
+                </td>
+                <td style="text-align: reight;">
+                    {{ (fille.nombre * fille.pu).toLocaleString() }}
+                </td>
+            </tr>
+        </table>
+        <br />
+        <p> <b>Client : </b> {{ commande.utilisateur.nom + ' ' + commande.utilisateur.prenom }}</p>
+        <p> <b>Total : </b> Ar {{ totalPrix.toLocaleString() }}</p>
+        <div class="col-12 mt-3" *ngIf="isResto && this.commande.etat !=0 && this.commande.etat != 11 ">
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <button class="btn btn-success" (click)="validerRestoCommande()">
+                        Valider
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn btn-danger" (click)="annulerRestoCommande()">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-3" *ngIf="isAdmin && this.commande.etat == 11 ">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="input-group">
+                        <select class="form-control" id="select-livreurs" [(ngModel)]="livreurSelect">
+                            <option *ngFor="let livreur of livreurs" value="{{livreur._id}}">{{ livreur.nom + ' '+ livreur.prenom }}</option>
+                        </select>
+                        <span class="input-group-append">
+                          <button type="submit" class="btn btn-success" (click)="assignerLivreur()">Assigner au livreur</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <div class="col-12">
+            <span class="badge badge-{{etatLib.classe}}">{{ etatLib.text }}</span>
+        </div>
+    </div>
+    <!-- /.card-footer -->
+</div>
+<!-- /.card -->
+

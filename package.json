@@ -23,6 +23,7 @@
     "@ngxs/logger-plugin": "^3.7.3",
     "@ngxs/store": "^3.7.3",
     "admin-lte": "3.2",
+    "axios": "^0.26.1",
     "express": "^4.17.3",
     "path": "^0.12.7",
     "rxjs": "~7.5.0",
@@ -44,5 +45,8 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.6.2"
   },
-  "engines": { "node": "14.18.1", "npm": "8.5.4" }
+  "engines": {
+    "node": "14.18.1",
+    "npm": "8.5.4"
+  }
 }
