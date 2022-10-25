@@ -7,7 +7,7 @@ import GLOBAL_CONFIG from '../config/globale.config';
   providedIn: 'root'
 })
 export class EKalyService {
-  private api = "http://localhost:3001/api";
+  private api = "https://api-e-kaly.herokuapp.com/api";
 
   constructor(private http : HttpClient) { }
 
