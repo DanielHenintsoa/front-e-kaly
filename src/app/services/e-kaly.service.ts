@@ -23,6 +23,14 @@ export class EKalyService {
     return this.http.get(this.api+"/plats");
   }
 
+  getRestos() : Observable<any> {
+    return this.http.get(this.api+"/restos");
+  }
+
+  rechercher(text:string) : Observable<any> {
+    return this.http.get(this.api+"/client/rechercher?text="+text);
+  }
+  
   getClientCommandes(idUser:string) : Observable<any> {
     return this.http.get(`${this.api}/client/commandes?idUser=${idUser}`);
   }
@@ -35,9 +43,20 @@ export class EKalyService {
     return this.http.get(`${this.api}/e-kaly/commandes`);
   }
   
-  assignerLivreur(idLivreur:string) : Observable<any>{
+  getLivreurCommandes(idLivreur:string) : Observable<any> {
+    return this.http.get(`${this.api}/livreur/commandes?idLivreur=${idLivreur}`);
+  }
+
+  assignerLivreur(idLivreur:string, idCommande:string) : Observable<any>{
     return this.http.post(`${this.api}/e-kaly/assigner-livreur`, {
-      idLivreur : idLivreur
+      idLivreur : idLivreur,
+      idCommande : idCommande
+    });
+  }
+
+  livrerCommande(idCommande:string) : Observable<any> {
+    return this.http.post(`${this.api}/livreur/livrer`, {
+      idCommande : idCommande
     });
   }
 
@@ -53,6 +72,14 @@ export class EKalyService {
       mdp : mdp
     });
   }
+
+  sendMail(commande:any, isValide:boolean) : Observable<any>{
+    return this.http.post(this.api+"/sendMail", {
+      commande : commande,
+      isValide : isValide
+    });
+  }
+  
 
   validerPanier(panier:Array<any>, idUser:string) : Observable<any> {
     return this.http.post(this.api+"/commander", {

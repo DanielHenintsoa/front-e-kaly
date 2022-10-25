@@ -1,3 +1,37 @@
+<section class="content mb-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" placeholder="Recherche" [(ngModel)]="recherche">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-sm btn-default" (click)="rechercher()">
+                            <i class="fa fa-search"></i> Rechercher
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-danger" (click)="clear()">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 offset-md-2 mt-3 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Filtre Resto</h3>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body row">
+                        <div *ngFor="let resto of restos" class="custom-control custom-checkbox col-6 col-md-3">
+                            <input class="custom-control-input" type="checkbox" name="filtre-etat" id="checknox-{{resto._id}}" value="{{resto._id}}" (change)="filtrer(resto._id, $event)">
+                            <label for="checknox-{{resto._id}}" class="custom-control-label">{{resto.libelle}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="row">
     <div class="col-12 col-sm-6 col-md-4" *ngFor="let plat of plats">
         <app-plat [plat]="plat" ></app-plat>

@@ -28,6 +28,7 @@ import { CommandesComponent } from './pages/commandes/commandes.component';
 import { CommandeComponent } from './components/elements/commande/commande.component';
 import { RestoCommandesComponent } from './pages/resto/resto-commandes/resto-commandes.component';
 import { EKalyCommandesComponent } from './pages/e-kaly/e-kaly-commandes/e-kaly-commandes.component';
+import { LivreurCommandesComponent } from './pages/livreur/livreur-commandes/livreur-commandes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { EKalyCommandesComponent } from './pages/e-kaly/e-kaly-commandes/e-kaly-
     CommandesComponent,
     CommandeComponent,
     RestoCommandesComponent,
-    EKalyCommandesComponent
+    EKalyCommandesComponent,
+    LivreurCommandesComponent
   ],
   imports: [
     BrowserModule,

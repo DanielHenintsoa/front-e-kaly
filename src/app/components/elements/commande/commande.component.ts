@@ -17,13 +17,15 @@ export class CommandeComponent implements OnInit {
   livreurSelect:string;
   isResto = false;
   isAdmin = false;
+  isLivreur = false;
   private _etatLib:any;
   private utilisateur :any;
 
   constructor(private store : Store, private service : EKalyService) {
     const user = this.store.selectSnapshot(EKalyState.getUser);
     this.isResto = user.idResto ? true : false;
-    this.isAdmin = user.idProfil == "6241b44394736fed37e2fb28";
+    this.isAdmin = user.idProfil == "6241b44394736fed37e2fb28"; // admin
+    this.isLivreur = user.idProfil == "6241b4f794736fed37e2fb2a"; // livreur
     this.utilisateur = user;
   }
 
@@ -34,7 +36,7 @@ export class CommandeComponent implements OnInit {
       this.totalPrix += (f.nombre * f.pu);
     });
     if(this.isAdmin){
-      this.livreurSelect = this.livreurs[0]._id;
+      this.livreurSelect = this.commande.livreurs.length > 0 ? this.commande.livreurs[0]._id : this.livreurs[0]._id;
     }
   }
 
@@ -43,6 +45,7 @@ export class CommandeComponent implements OnInit {
     this.service.validerCommandeResto(this.commande._id).subscribe(response => {
       this.store.dispatch(new SetIsSimpleLoader(false));
       this.commande.etat = 11;
+      this.envoyerEmail(true);
       console.log(response);
     }, (error)=>{
       this.store.dispatch(new SetIsSimpleLoader(false));
@@ -53,14 +56,45 @@ export class CommandeComponent implements OnInit {
     
   }
 
+  private envoyerEmail(isValide:boolean){
+    try {
+      this.service.sendMail(this.commande, isValide).subscribe(response => {
+        console.log("OK Mail", response);
+      }, (error)=>{
+        console.log(error);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   assignerLivreur(){
     this.store.dispatch(new SetIsSimpleLoader(true));
-    this.service.assignerLivreur(this.livreurSelect).subscribe(response => {
+    this.service.assignerLivreur(this.livreurSelect, this.commande._id).subscribe(response => {
       this.store.dispatch(new SetIsSimpleLoader(false));
+
+      this.livreurs.map((l:any) => {
+        if(l._id == this.livreurSelect){
+          this.commande.livreurs = [];
+          this.commande.livreurs.push(l);
+        }
+      });
       console.log(response);
     }, (error)=>{
       this.store.dispatch(new SetIsSimpleLoader(false));
     });
+  }
+
+  livrerCommande(){
+    this.store.dispatch(new SetIsSimpleLoader(true));
+    this.service.livrerCommande(this.commande._id).subscribe(response => {
+      this.store.dispatch(new SetIsSimpleLoader(false));
+      this.commande.etat = 21;
+      console.log(response);
+    }, (error)=>{
+      this.store.dispatch(new SetIsSimpleLoader(false));
+    });
+    
   }
 
   get etatLib() {

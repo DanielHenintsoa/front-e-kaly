@@ -1,4 +1,20 @@
 <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Filtre</h3>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body row">
+                <div *ngFor="let filtre of etats" class="custom-control custom-checkbox col-6 col-md-3">
+                    <input class="custom-control-input" type="checkbox" name="filtre-etat" id="checknox-{{filtre.etat}}" value="{{filtre.etat}}" (change)="filtrer(filtre.etat, $event)">
+                    <label for="checknox-{{filtre.etat}}" class="custom-control-label">{{filtre.text}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="col-12" *ngFor="let c of commandes">
         <app-commande [commande]="c" ></app-commande>
     </div>

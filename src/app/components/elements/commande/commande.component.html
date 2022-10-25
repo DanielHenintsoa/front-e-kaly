@@ -1,4 +1,4 @@
-<div class="card card-outline card-warning">
+<div class="card card-outline card-warning" *ngIf="commande.etat <= 11 || !isLivreur">
     <div class="card-header">
         <h3 class="card-title">Commande : {{ daty.toLocaleDateString("fr") + " "+ daty.toLocaleTimeString()}} </h3>
         <div class="card-tools">
@@ -40,6 +40,7 @@
         </table>
         <br />
         <p> <b>Client : </b> {{ commande.utilisateur.nom + ' ' + commande.utilisateur.prenom }}</p>
+        <p *ngIf=" commande.livreurs.length > 0"> <b>Livreur : </b> {{ commande.livreurs[0].nom + ' ' + commande.livreurs[0].prenom }}</p>
         <p> <b>Total : </b> Ar {{ totalPrix.toLocaleString() }}</p>
         <div class="col-12 mt-3" *ngIf="isResto && this.commande.etat !=0 && this.commande.etat != 11 ">
             <div class="row">
@@ -69,6 +70,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 mt-3" *ngIf="isLivreur">
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <button class="btn btn-success" (click)="livrerCommande()">
+                        Livrer
+                    </button>
+                </div>
+            </div>
+        </div>
+
         
     </div>
     <!-- /.card-body -->
